@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    // ⚠ ATENÇÃO: Confirmar se o banco é 'db_museu_treze_maio' mesmo
     private static final String URL =
             "jdbc:sqlserver://localhost:1433;databaseName=db_museu_treze_maio;encrypt=false;trustServerCertificate=true;";
 
