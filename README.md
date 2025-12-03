@@ -8,7 +8,6 @@ Esse projeto foi realizado com o intuito de gerenciar o acervo bibliográfico e 
 - [Modelagem do Banco de Dados](#modelagem-do-banco-de-dados)
 - [Ferramentas Utilizadas](#ferramentas-utilizadas)
 - [Como Executar o Projeto](#como-executar-o-projeto)
-- [Estrutura do Projeto](#estrutura-do-projeto)
 
 ---
 
@@ -45,7 +44,7 @@ Mapeia o modelo conceitual para uma estrutura de tabelas, com chaves primárias 
 *   **IDE:** SQL Server Management Studio (SSMS)
 *   **Funcionalidades (Casos de Uso): Astah**
 *   **Modelagem:** brModelo
-*   **Interface do Sistema:**
+*   **Interface do Sistema:** Java with Maven, JAVA FX
 *   **Controle de Versão:** Git / GitHub (Opcional)
 
 ---
