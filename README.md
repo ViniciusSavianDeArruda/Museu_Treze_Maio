@@ -72,6 +72,24 @@ Mapeia o modelo conceitual para uma estrutura de tabelas, com chaves primárias 
 
 8. ## Desenvolvimento da Aplicação (Java)
 
+
+### Atividades de Cada Integrante
+| Integrante | Atividades/Responsabilidades |
+| :--- | :--- |
+| **Wilson Rocha** | Estrutura da Modelagem Lógica do Banco, Auxílio na escrita e validação dos Scripts SQL (DDL/DML). |
+| **Felipe Isaia** | Configuração da Conexão com o banco, Realização dos Testes de Qualidade e Produção dos Vídeos de Demonstração. |
+| **Gabriel Reis** | **Desenvolvimento da Interface (JavaFX/FXML)**, Arquitetura do Código (MVC/Classes) e Integração Final do Sistema. |
+
+### Conclusões e Dificuldades
+As principais dificuldades e aprendizados foram:
+
+1.  **Persistência da Herança:** O maior desafio foi garantir que os dados fossem salvos nas duas tabelas (`ITEM_ACERVO` e `LIVRO`) simultaneamente. Isso foi resolvido com a implementação de **Transações Atômicas** (`commit`/`rollback`) no DAO, garantindo a integridade dos dados.
+2.  **Conectividade:** Dificuldades iniciais na configuração da conexão  com o SQL Server (instância nomeada, necessidade de `\\` na URL de conexão).
+3.  **Módulos JavaFX:** Ajustes finos no arquivo `module-info.java` para permitir que o JavaFX acesse as classes Model (reflexão da `TableView`), o que demonstrou o domínio do sistema modular Java.
+4.  **Integridade Referencial na Exclusão:** Tivemos que ajustar o banco de dados (excluir o FK de `LOG_OPERACAO`) e a ordem dos `DELETE`s no DAO para evitar travamento do sistema.
+
+---
+
 ### Tecnologias e Ferramentas
 O sistema foi desenvolvido utilizando a linguagem **Java (JDK 21)**, escolhida pela sua robustez e portabilidade. Para a interface gráfica, utilizou-se o framework **JavaFX**, que permite a criação de telas modernas e modulares.
 
