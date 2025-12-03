@@ -68,9 +68,7 @@ Mapeia o modelo conceitual para uma estrutura de tabelas, com chaves primárias 
 5.  Execute o script completo para popular o banco de dados com dados de exemplo.
 6.  (Opcional) Para verificar se tudo está funcionando, abra e execute o arquivo `Consultas_db_Museu_Treze_Maio.sql`.
 
-7. PARTE DO JAVA
-
-8. ## Desenvolvimento da Aplicação (Java)
+## Desenvolvimento da Aplicação (Java)
 
 
 ### Atividades de Cada Integrante
