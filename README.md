@@ -67,13 +67,43 @@ Mapeia o modelo conceitual para uma estrutura de tabelas, com chaves primárias 
 5.  Execute o script completo para popular o banco de dados com dados de exemplo.
 6.  (Opcional) Para verificar se tudo está funcionando, abra e execute o arquivo `Consultas_db_Museu_Treze_Maio.sql`.
 
-7. PARTE DO JAVA...
----
+7. PARTE DO JAVA
 
-## Estrutura do Projeto
-*   `Scripts-SQL/DDL_db_Museu_Treze_Maio.sql`: Script para criação da estrutura do banco de dados (tabelas, constraints, triggers).
-*   `Scripts-SQL/DML(inserts)_db_Museu_Treze_Maio.sql`: Script para inserção de dados de exemplo.
-*   `Scripts-SQL/Consultas_db_Museu_Treze_Maio.sql`: Exemplos de consultas complexas para extrair informações do banco.
-*   `Dicionario-Dados/Dicionario de Dados.md`: Documentação detalhada de cada tabela e atributo do banco.
-*   `Modelos-Diagramas`: Arquivos fontes dos modelos e do caso de uso.
-*   `Imagens-Diagramas`: Imagens dos diagramas.
+8. ## Desenvolvimento da Aplicação (Java)
+
+### Tecnologias e Ferramentas
+O sistema foi desenvolvido utilizando a linguagem **Java (JDK 21)**, escolhida pela sua robustez e portabilidade. Para a interface gráfica, utilizou-se o framework **JavaFX**, que permite a criação de telas modernas e modulares.
+
+* **Gerenciamento de Dependências:** Maven (para automação de bibliotecas como JavaFX e Driver SQL).
+* **IDE:** IntelliJ IDEA.
+* **Conectividade:** Driver JDBC da Microsoft para comunicação com o SQL Server.
+
+### Arquitetura do Sistema
+O projeto segue estritamente o padrão de arquitetura **MVC (Model-View-Controller)**, complementado pelo padrão **DAO (Data Access Object)** para isolar as regras de negócio do acesso a dados.
+
+A estrutura de pacotes foi organizada da seguinte forma:
+
+* **`br.com.museu.model` (Model):** Contém as classes POJO que representam as entidades do mundo real (ex: `Livro`, `Usuario`, `ItemHistorico`). Aplicamos conceitos de **Herança** (classe pai `ItemAcervo`) para evitar duplicação de código.
+* **`br.com.museu.view` (View):** Arquivos `.fxml` que definem o layout visual das telas (XML), separando completamente o design da lógica de programação.
+* **`br.com.museu.controller` (Controller):** Classes responsáveis por "dar vida" às telas. Elas capturam os eventos de clique, preenchem as tabelas e validam os dados antes de enviar para o banco. Implementam também a lógica de segurança (ex: bloquear botões para usuários "Visitantes").
+* **`br.com.museu.dao` (DAO):** Camada de persistência. Aqui ficam os comandos SQL (`INSERT`, `UPDATE`, `SELECT`, `DELETE`). O DAO recebe objetos do Controller e os transforma em comandos para o banco.
+* **`br.com.museu.util`:** Utilitários como a classe de Conexão (Singleton) e a Sessão do Usuário.
+
+### Soluções Técnicas Implementadas
+
+1.  **Controle de Transações (Atomicidade):**
+    Para salvar um livro, o sistema precisa inserir dados em duas tabelas diferentes (`ITEM_ACERVO` e `LIVRO`). Implementamos o controle de transação no Java (`conn.setAutoCommit(false)`), garantindo que, se ocorrer um erro na segunda tabela, a primeira operação é desfeita automaticamente (`rollback`), mantendo o banco íntegro.
+
+2.  **Controle de Acesso (Singleton):**
+    Desenvolvemos uma classe `SessaoUsuario` que armazena o usuário logado na memória. Ao abrir qualquer tela, o sistema verifica o perfil armazenado. Se for "Visitante", os componentes de edição e exclusão são ocultados ou desabilitados via código.
+
+3.  **Interface Dinâmica:**
+    Utilizamos `ObservableList` do JavaFX para garantir que as tabelas de listagem (Grids) sejam atualizadas automaticamente assim que um item é cadastrado ou editado, sem necessidade de reiniciar a tela.
+
+### Como Executar a Aplicação
+
+1.  **Pré-requisitos:** Ter o Java JDK 21 e o Maven instalados.
+2.  **Configuração:** O arquivo `pom.xml` gerencia todas as bibliotecas necessárias. Ao abrir o projeto na IDE, execute o comando `mvn clean install` para baixar as dependências.
+3.  **Execução:** Localize a classe principal `br.com.museu.museutrezemaio.App` e execute o método `main`.
+4.  **Login:** A tela inicial solicitará usuário e senha (previamente cadastrados no banco de dados).
+
